@@ -1,0 +1,104 @@
+@import '@/variables';
+
+/* Fonts */
+// Regular
+@font-face {
+	font-family: "Mulish";
+	src: url(./assets/fonts/Mulish/static/Mulish-Regular.ttf) format("truetype");
+	font-weight: 400;
+}
+
+// Medium
+@font-face {
+	font-family: "Mulish";
+	src: url(./assets/fonts/Mulish/static/Mulish-Medium.ttf) format("truetype");
+	font-weight: 500;
+}
+
+// Semi-bold
+@font-face {
+	font-family: "Mulish";
+	src: url(./assets/fonts/Mulish/static/Mulish-SemiBold.ttf) format("truetype");
+	font-weight: 600;
+}
+
+// Bold
+@font-face {
+	font-family: "Mulish";
+	src: url(./assets/fonts/Mulish/static/Mulish-Bold.ttf) format("truetype");
+	font-weight: 700;
+}
+
+// Italic regular
+@font-face {
+	font-family: "Mulish";
+	src: url(./assets/fonts/Mulish/static/Mulish-Italic.ttf) format("truetype");
+	font-weight: 400;
+	font-style: italic;
+}
+
+/* Resetting styles */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Mulish";
+}
+
+/* Wide-used classes */
+body {
+	background-color: $bodyBackground;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+input,
+textarea {
+	color: $textNeutral;
+}
+
+a {
+	color: $linkNeutral;
+	text-decoration: none;
+
+	&:hover {
+		color: $linkNeutral;
+	}
+}
+
+.thumbnail__bubble {
+	position: absolute;
+	top: calc(50% - 9px);
+	width: 18px;
+	height: 18px;
+	background: white;
+	border-radius: 100px;
+	border: 2px solid $yellowAccentDarker;
+
+	&:first-child {
+		left: -9px;
+
+		&::before {
+			content: 'news';
+			position: relative;
+			top: 100%;
+			left: -45px;
+			display: block;
+			color: $textNeutral;
+			font-style: italic;
+			font-weight: 400;
+			font-size: 24px;
+			transform: rotate(-90deg);
+		}
+	}
+
+	&:nth-child(2) {
+		right: -9px;
+	}
+}
