@@ -9,6 +9,7 @@ import Container from '@/components/Container.vue';
 import ContainerWide from '@/components/ContainerWide.vue';
 import BlockLink from '@/components/BlockLink.vue';
 import Footer from '@/components/Footer.vue';
+import ButtonClassic from '@/components/ButtonClassic.vue';
 
 // Init
 const uahub = createApp(App);
@@ -19,5 +20,6 @@ uahub.component('Container', Container);
 uahub.component('ContainerWide', ContainerWide);
 uahub.component('BlockLink', BlockLink);
 uahub.component('Footer', Footer);
+uahub.component('ButtonClassic', ButtonClassic);
 
 uahub.mount('#app');

@@ -16,6 +16,5 @@ const { cssClass } = defineProps<ContainerProps>();
 .container-wide {
     margin: 0 auto;
     max-width: 1440px;
-    overflow-x: hidden;
 }
 </style>

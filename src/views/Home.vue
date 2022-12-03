@@ -9,7 +9,7 @@ const store = useGlobalStore();
     <ContainerWide cssClass="main-page-container">
         <section class="main-page__essentials">
             <img class="img-decoration" src="@/assets/backgrounds/bg1.png" />
-            <img class="img-decoration--strip" src="@/assets/backgrounds/bgStrip.svg" />
+            <img class="img-decoration--stripe" src="@/assets/backgrounds/bgStrip.svg" />
             <span>hi! meet the</span>
             <h1>Ukrainian osu!&nbsp;Community</h1>
             <div class="main-page__essentials__links">
@@ -59,7 +59,7 @@ const store = useGlobalStore();
         z-index: -1;
     }
 
-    .img-decoration--strip:nth-child(2) {
+    .img-decoration--stripe:nth-child(2) {
         position: absolute;
         top: 151px;
         left: -240px;
@@ -92,7 +92,7 @@ h1 {
 
 .main-page__news {
     position: relative;
-    max-width: 585px;
+    max-width: 603px;
     padding-top: 128px;
     padding-right: 18px;
 

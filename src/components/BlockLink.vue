@@ -23,16 +23,16 @@ const imageUrl: string = new URL(`/src/assets/icons/${icon}`, import.meta.url).h
 .block-link {
     position: relative;
     padding: 12px;
-    background: $greyTranslucent;
+    background-color: $greyTranslucent;
     backdrop-filter: blur(10px);
     border-radius: 8px;
     transition: .1s linear;
     
     &:hover {
-        background: $purpleTranslucent;
+        background-color: $purpleTranslucent;
         
         .block-link__inner {
-            background: $purpleTranslucent;
+            background-color: $purpleTranslucent;
 
             img {
                 filter: brightness(0);
@@ -58,15 +58,20 @@ const imageUrl: string = new URL(`/src/assets/icons/${icon}`, import.meta.url).h
 }
 
 .block-link--active {
-    background: $purpleTranslucent;
+    background-color: $purpleTranslucent;
     color: $textBlack;
 
     .block-link__inner {
-        background: $purpleTranslucent;
+        background-color: $purpleTranslucent;
 
         span {
             color: $textBlack;
         }
+    }
+
+    &:hover {
+        box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.1);
+        background-color: rgba($purpleTranslucent, 100%);
     }
 }
 
@@ -76,7 +81,7 @@ const imageUrl: string = new URL(`/src/assets/icons/${icon}`, import.meta.url).h
     align-items: center;
     gap: 10px;
     padding: 40px 0;
-    background: $greyTranslucent;
+    background-color: $greyTranslucent;
     backdrop-filter: blur(10px);
     border-radius: 8px;
     font-weight: 600;

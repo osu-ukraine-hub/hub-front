@@ -18,11 +18,12 @@ const { type } = defineProps<ContainerProps>();
 @import '@/variables';
 
 footer {
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 72px 0 115px 0;
+    padding: 0 0 115px 0;
 
     span {
         font-weight: 500;

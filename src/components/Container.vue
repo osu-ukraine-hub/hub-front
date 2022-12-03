@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface ContainerProps {
-  cssClass?: string
+  cssClass?: string;
 }
 
 const { cssClass } = defineProps<ContainerProps>();
@@ -16,6 +16,5 @@ const { cssClass } = defineProps<ContainerProps>();
 .container {
     margin: 0 auto;
     width: 1024px;
-    overflow-x: hidden;
 }
 </style>
