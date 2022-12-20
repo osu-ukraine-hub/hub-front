@@ -2,11 +2,18 @@ import { axiosInstance } from "@/main";
 import { AxiosResponse } from "axios";
 import { defineStore } from "pinia";
 
-interface User {
+interface LoginResponse {
   id: number;
   osuId: number;
   username: string;
-  permissions: string | string[];
+  permissions: any;
+}
+
+interface User {
+  id: number | undefined;
+  osuId: number | undefined;
+  username: string | undefined;
+  permissions: string[] | undefined;
 }
 
 interface StateOptions {
@@ -18,55 +25,49 @@ export const useUserStore = defineStore("user", {
   state: () =>
     ({
       isLoggedIn: false,
-      user: {
-        id: 0,
-        osuId: 0,
-        username: "",
-        permissions: [],
-      },
+      user: {},
     } as StateOptions),
   getters: {},
   actions: {
     async login(code: string): Promise<void> {
-      let request: AxiosResponse | undefined;
       try {
-        request = await axiosInstance.post("/auth/osu/callback", undefined, {
-          params: {
-            code: code,
-          },
-        });
-      } catch (error) {
+        const request: AxiosResponse<LoginResponse> = await axiosInstance.post(
+          "/auth/osu/callback",
+          undefined,
+          {
+            params: {
+              code: code,
+            },
+          }
+        );
+
+        if (request && request.status < 400) {
+          request.data.permissions = request?.data.permissions.split(",");
+          this.user = request?.data;
+
+          this.isLoggedIn = true;
+        } else {
+          console.log("Wotefak mazafak xD");
+        }
+      } catch (error: any) {
         console.log(error);
-      }
-
-      if (request && request.status < 400) {
-        request?.data.permissions.split(",");
-        this.user = request?.data;
-
-        this.isLoggedIn = true;
-      } else {
-        console.log("Wotefak mazafak xD");
       }
     },
     async logout(): Promise<void> {
-      let request: AxiosResponse | undefined;
       try {
-        request = await axiosInstance.get("/auth/logout");
+        const request: AxiosResponse<void> = await axiosInstance.get(
+          "/auth/logout"
+        );
+
+        if (request && request.status < 400) {
+          this.user = {} as User;
+
+          this.isLoggedIn = false;
+        } else {
+          console.log("Wotefak mazafak xD");
+        }
       } catch (error) {
         console.log(error);
-      }
-
-      if (request && request.status < 400) {
-        this.user = {
-          id: 0,
-          osuId: 0,
-          username: "",
-          permissions: [],
-        };
-
-        this.isLoggedIn = false;
-      } else {
-        console.log("Wotefak mazafak xD");
       }
     },
   },
