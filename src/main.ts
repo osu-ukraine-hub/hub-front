@@ -10,10 +10,20 @@ import ContainerWide from '@/components/ContainerWide.vue';
 import BlockLink from '@/components/BlockLink.vue';
 import Footer from '@/components/Footer.vue';
 import ButtonClassic from '@/components/ButtonClassic.vue';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
+import axios from 'axios';
+
+export const axiosInstance = axios.create({
+  baseURL: "http://localhost:8080/",
+  timeout: 5000,
+  withCredentials: true,
+});
 
 // Init
 const uahub = createApp(App);
-uahub.use(createPinia())
+const pinia = createPinia();
+
+uahub.use(pinia.use(piniaPluginPersistedstate));
 uahub.use(router);
 
 uahub.component('Container', Container);
