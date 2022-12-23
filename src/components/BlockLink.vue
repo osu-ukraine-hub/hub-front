@@ -1,18 +1,22 @@
 <script setup lang="ts">
 interface BlockLinkProps {
-    active?: boolean;
-    icon: string;
+    view?: string;
+    icon?: string;
+    avatar?: string;
 }
 
-const { active, icon } = defineProps<BlockLinkProps>();
-const imageUrl: string = new URL(`/src/assets/icons/${icon}`, import.meta.url).href;
+const { view, icon, avatar } = defineProps<BlockLinkProps>();
+const imageUrl: string = icon ? new URL(`/src/assets/icons/${icon}`, import.meta.url).href : '';
 </script>
 
 <template>
-    <div :class="'block-link' + ' ' + (active ? 'block-link--active' : '')">
+    <div :class="`block-link block-link--${view}`">
         <div class="block-link__inner">
-            <img :src="imageUrl" />
-            <span><slot></slot></span>
+            <img v-if="icon" class="block-link__icon" :src="imageUrl" />
+            <img v-if="avatar" class="header__avatar" :src="avatar" />
+            <span>
+                <slot></slot>
+            </span>
         </div>
     </div>
 </template>
@@ -23,18 +27,19 @@ const imageUrl: string = new URL(`/src/assets/icons/${icon}`, import.meta.url).h
 .block-link {
     position: relative;
     padding: 12px;
+    height: 100%;
     background-color: $greyTranslucent;
     backdrop-filter: blur(10px);
     border-radius: 8px;
     transition: .1s linear;
-    
+
     &:hover {
         background-color: $purpleTranslucent;
-        
+
         .block-link__inner {
             background-color: $purpleTranslucent;
 
-            img {
+            .block-link__icon {
                 filter: brightness(0);
             }
 
@@ -57,6 +62,34 @@ const imageUrl: string = new URL(`/src/assets/icons/${icon}`, import.meta.url).h
     }
 }
 
+.block-link__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100%;
+    gap: 10px;
+    padding: 40px 0;
+    background-color: $greyTranslucent;
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 18px;
+    transition: .05s linear;
+
+    span {
+        max-width: 200px;
+        overflow-wrap: break-word;
+        text-align: center;
+        color: $linkNeutral;
+        transition: .05s linear;
+    }
+
+    .block-link__icon {
+        max-width: 32px;
+    }
+}
+
 .block-link--active {
     background-color: $purpleTranslucent;
     color: $textBlack;
@@ -75,26 +108,72 @@ const imageUrl: string = new URL(`/src/assets/icons/${icon}`, import.meta.url).h
     }
 }
 
-.block-link__inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 40px 0;
-    background-color: $greyTranslucent;
-    backdrop-filter: blur(10px);
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 18px;
-    transition: .05s linear;
+.block-link--comingsoon, .block-link--disabled {
+    background-color: darken($greyTranslucent, 5%);
 
-    span {
-        color: $linkNeutral;
-        transition: .05s linear;
+    .block-link__inner {
+        background-color: darken($greyTranslucent, 5%);
+
+        .block-link__icon {
+            filter: saturate(0);
+        }
     }
 
-    img {
-        max-width: 32px;
+    &:hover {
+        background-color: darken($greyTranslucent, 5%);
+
+        .block-link__inner {
+            background-color: darken($greyTranslucent, 5%);
+
+            .block-link__icon {
+                filter: saturate(0);
+            }
+        }
+    }
+}
+
+.block-link--comingsoon {
+    &::after {
+        content: 'coming soon !';
+        position: absolute;
+        top: -8px;
+        left: -8px;
+        display: block;
+        width: fit-content;
+        padding: 4px;
+        border-radius: 4px;
+        background-color: rgba($redTranslucent, 100%);
+        transform: rotate(-15deg);
+    }
+
+    .block-link__inner {
+        span {
+            filter: saturate(0);
+        }
+    }
+
+    &:hover {
+        .block-link__inner {
+            span {
+                color: $linkNeutral;
+            }
+        }
+    }
+}
+
+.block-link--disabled {
+    .block-link__inner {
+        span {
+            color: $textNeutral;
+        }
+    }
+
+    &:hover {
+        .block-link__inner {
+            span {
+                color: $textNeutral;
+            }
+        }
     }
 }
 </style>

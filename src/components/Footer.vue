@@ -1,9 +1,9 @@
 <script setup lang="ts">
-interface ContainerProps {
+interface FooterProps {
   type?: string
 }
 
-const { type } = defineProps<ContainerProps>();
+const { type } = defineProps<FooterProps>();
 </script>
 
 <template>

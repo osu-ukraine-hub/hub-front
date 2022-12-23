@@ -20,13 +20,12 @@ const { cssClass } = defineProps<ButtonClassicProps>();
 .button-classic {
     border-radius: 4px;
     padding: 5px;
+    height: fit-content;
 
-    :nth-child(1) {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    div:nth-child(1) {
         background-color: inherit;
         border-radius: 4px;
+        height: fit-content;
     }
 }
 </style>

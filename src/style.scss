@@ -115,3 +115,20 @@ a {
 	-webkit-user-drag: none;
 	z-index: -1;
 }
+
+.menu-btn {
+	background-color: $purpleTranslucent;
+
+	div:nth-child(1) {
+		display: flex;
+		place-items: center;
+		padding: 5px 10px;
+	}
+}
+
+.header__avatar {
+    width: 32px;
+    height: 32px;
+    border: 1px solid $yellowAccentDarker;
+    border-radius: 100%;
+}
